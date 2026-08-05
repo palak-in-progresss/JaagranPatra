@@ -1,0 +1,191 @@
+@import 'tailwindcss';
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+@font-face {
+  font-family: 'dmsans-regular';
+  src: url('./assets/fonts/DMSans-Regular.ttf') format('tff');
+}
+
+@font-face {
+  font-family: 'poppons';
+  src: url('./assets//fonts/Poppins-Regular.ttf') format('ttf');
+}
+
+:root {
+  --dmsans-reg-font: 'dmsans-regular', sans-serif;
+  --poppons-font: 'poppons', sans-serif;
+  --primary-color: #00b074;
+  --primary-dark: #004030;
+  --primary-light: #8dff9e;
+  --accent-color: #fffdf6;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  --dark-color: #0c0c0c;
+  --light-color: #fff;
+}
+
+* {
+  font-family: var(--dmsans-reg-font);
+}
+
+@theme inline {
+  --color-primary: var(--primary-color);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-secondary: var(--secondary-color);
+  --color-secondary-dark: var(--secondary-dark);
+  --color-secondary-light: var(--secondary-light);
+  --color-accent: var(--accent-color);
+  --color-success: var(--success-color);
+  --color-warning: var(--warning-color);
+  --color-error: var(--error-color);
+  --color-dark: var(--dark-color);
+  --color-light: var(--light-color);
+
+  --font-dmsans: var(--dmsans-reg-font);
+  --font-poppons: var(--poppons-font);
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================= */
+/* Google Translate Widget Base Styling */
+/* ============================================= */
+
+/* Hide Google's default elements */
+.goog-te-banner-frame,
+#goog-gt-tt,
+#goog-gt-vt,
+.VIpgJd-suEOdc,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf {
+  display: none !important;
+}
+
+/* Extra hiding for tooltip elements */
+#goog-gt-tt {
+  visibility: hidden !important;
+}
+
+#goog-gt-tt:hover {
+  visibility: hidden !important;
+}
+
+/* ============================================= */
+/* Gadget Container Styling */
+/* ============================================= */
+
+.goog-te-gadget-icon {
+  display: none !important;
+  background-position: 0 0 !important;
+}
+
+.goog-te-gadget-simple {
+  /* Layout */
+  padding: 10px !important;
+  width: min-content !important;
+
+  /* Appearance */
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 100% !important;
+  box-shadow: 0 1px 3px #0000001a !important;
+
+  /* Typography */
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-size: 14px !important;
+
+  /* Animation */
+  transition: all 0.2s ease !important;
+}
+
+/* Emoji language indicator */
+.goog-te-gadget-simple::after {
+  content: '🗣️';
+}
+
+/* Hover state */
+.goog-te-gadget-simple:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ============================================= */
+/* Link & Text Elements */
+/* ============================================= */
+
+.VIpgJd-ZVi9od-xl07Ob-lTBxed {
+  display: none !important;
+  color: #4a5568 !important;
+  text-decoration: none !important;
+  align-items: center !important;
+  width: min-content;
+}
+
+.VIpgJd-ZVi9od-xl07Ob-lTBxed span {
+  color: inherit !important;
+}
+
+.VIpgJd-ZVi9od-xl07Ob-lTBxed span[aria-hidden='true'] {
+  font-size: 12px !important;
+}
+
+/* Hide "Select Language" text */
+.goog-te-gadget-simple > span:first-child,
+.goog-te-gadget-simple a > span:first-child,
+.goog-te-menu-value span:first-child {
+  display: none !important;
+}
+
+/* Remove language selector arrow border */
+.VIpgJd-ZVi9od-xl07Ob-lTBxed span[style*='border-left'] {
+  border-left: none !important;
+}
+
+.embedded-agent-container {
+  z-index: 10 !important;
+}
+
+.VIpgJd-ZVi9od-ORHb {
+  display: none !important;
+}
+
+.goog-te-gadget-simple {
+  display: block !important;
+}
+/* ============================================= */
+/* Dropdown Menu Styling */
+/* ============================================= */
+
+.goog-te-menu-value span {
+  color: #4a5568 !important;
+}
+
+/* ============================================= */
+/* Translated Content Adjustment */
+/* ============================================= */
+
+.translated-ltr {
+  z-index: 0 !important;
+}
+
+#google_translate_element {
+  z-index: 10 !important;
+}
+
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+  display: none !important;
+  margin-top: -50px !important;
+}
+
+/* ============================================= */
+/* Responsive Adjustments */
+/* ============================================= */
+
+@media (max-width: 400px) {
+  #google_translate_element {
+    top: 100px !important;
+    right: 15px !important;
+  }
+}
