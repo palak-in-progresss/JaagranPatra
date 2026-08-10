@@ -1,7 +1,7 @@
 {
   "name": "jaagran-patra",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/index.ts",
   "license": "MIT",
   "scripts": {
     "start": "node ./dist/index.js",
