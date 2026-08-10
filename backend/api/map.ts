@@ -1,6 +1,5 @@
-const appModule = require('../src/app');
-const app = appModule.default || appModule;
+import app from '../src/app';
 
-module.exports = (req: any, res: any) => {
+export default function handler(req: any, res: any) {
   return app(req, res);
-};
+}
