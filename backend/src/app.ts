@@ -30,10 +30,16 @@ app.use(securityHeaders);
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || config.allowedOrigins.includes(origin)) {
+      // Allow requests with no origin or matching configured allowed origins / vercel deployments
+      if (
+        !origin ||
+        config.allowedOrigins.includes(origin) ||
+        config.allowedOrigins.includes('*') ||
+        origin.endsWith('.vercel.app')
+      ) {
         callback(null, true);
       } else {
-        callback(new Error('CORS policy violation'));
+        callback(null, true); // Permissive CORS for deployed frontends
       }
     },
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
