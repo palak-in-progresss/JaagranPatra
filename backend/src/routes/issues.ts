@@ -5,7 +5,7 @@ import {
   authorize,
   AuthenticatedRequest,
 } from '../middleware/auth';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../config/database';
 import { uploadIssueFiles, handleUploadError } from '../middleware/upload';
 import {
   createIssue,
@@ -22,8 +22,6 @@ import {
 } from '../controllers/issueController';
 import { body, param, query } from 'express-validator';
 import { handleValidationErrors } from '../middleware/validation';
-
-const prisma = new PrismaClient();
 const router = Router();
 
 // Routes

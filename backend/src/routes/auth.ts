@@ -9,19 +9,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 const router = express.Router();
 
-// Rate limiting for authentication routes
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 50, // limit each IP to 50 requests per windowMs
-  message: {
-    error: 'Too many authentication attempts, please try again later.',
-  },
-});
-
-const generalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-});
+import { authLimiter, generalLimiter } from '../middleware/rateLimiting';
 
 // Public routes
 router.post(
