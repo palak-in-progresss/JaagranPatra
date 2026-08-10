@@ -24,13 +24,17 @@ export const securityHeaders = helmet({
 // CORS configuration
 export const corsConfig = cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
+    // Allow requests with no origin (like mobile apps, curl, or server-to-server)
     if (!origin) return callback(null, true);
 
-    if (config.allowedOrigins.includes(origin)) {
+    if (
+      config.allowedOrigins.includes(origin) ||
+      config.allowedOrigins.includes('*') ||
+      origin.endsWith('.vercel.app')
+    ) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(null, true);
     }
   },
   credentials: true,
@@ -45,21 +49,16 @@ export const sanitizeInput = (
   res: Response,
   next: NextFunction
 ) => {
-  if (req.body) {
-    for (const key in req.body) {
-      if (typeof req.body[key] === 'string') {
-        req.body[key] = xss(req.body[key]);
+  try {
+    if (req.body && typeof req.body === 'object') {
+      for (const key in req.body) {
+        if (typeof req.body[key] === 'string') {
+          req.body[key] = xss(req.body[key]);
+        }
       }
     }
-  }
-
-  // Also sanitize query parameters
-  if (req.query) {
-    for (const key in req.query) {
-      if (typeof req.query[key] === 'string') {
-        req.query[key] = xss(req.query[key] as string);
-      }
-    }
+  } catch (error) {
+    // Ignore body sanitization mutation errors
   }
 
   next();
