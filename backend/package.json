@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "dev": "nodemon --exec ts-node ./src/index.ts",
-    "build": "prisma generate && tsc -p .",
-    "postinstall": "prisma generate",
-    "vercel-build": "prisma generate && tsc -p .",
+    "build": "npx prisma generate && tsc -p .",
+    "postinstall": "npx prisma generate",
+    "vercel-build": "npx prisma generate && tsc -p .",
     "format": "prettier --write \"**/*.{js,ts,json,md}\"",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
