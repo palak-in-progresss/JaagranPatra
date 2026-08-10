@@ -86,10 +86,11 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-  res.send('API is running');
+  res.json({ success: true, message: 'Jaagran Patra API Server is running' });
 });
 // Routes
 app.use('/api', routes);
+app.use('/', routes);
 
 // Start meeting reminder service (only outside serverless environment)
 if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
