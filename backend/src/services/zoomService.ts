@@ -155,7 +155,9 @@ class ZoomService {
     this.clientSecret = process.env.ZOOM_CLIENT_SECRET!;
 
     if (!this.accountId || !this.clientId || !this.clientSecret) {
-      throw new Error('Missing Zoom credentials in environment variables');
+      console.warn(
+        '⚠️ Zoom credentials not configured in environment. Zoom API features will be disabled until configured.'
+      );
     }
   }
 
@@ -163,6 +165,10 @@ class ZoomService {
    * Generate access token using server-to-server OAuth
    */
   private async generateAccessToken(): Promise<string> {
+    if (!this.accountId || !this.clientId || !this.clientSecret) {
+      throw new Error('Zoom credentials are not configured.');
+    }
+
     try {
       // Check if token is still valid (with 5 minute buffer)
       if (this.accessToken && Date.now() < this.tokenExpiryTime - 300000) {
