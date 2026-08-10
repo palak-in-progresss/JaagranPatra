@@ -1,7 +1,14 @@
 module.exports = (req: any, res: any) => {
+  const rawUrl = (req.url || '/').split('?')[0].replace(/\/$/, '');
+
   // Direct health check response for Vercel
-  const url = req.url || '/';
-  if (url === '/' || url === '/api' || url === '/api/health' || url === '/health') {
+  if (
+    rawUrl === '' ||
+    rawUrl === '/' ||
+    rawUrl === '/api' ||
+    rawUrl === '/health' ||
+    rawUrl === '/api/health'
+  ) {
     return res.status(200).json({
       success: true,
       message: 'Jaagran Patra Vercel Serverless API is healthy!',
@@ -14,7 +21,6 @@ module.exports = (req: any, res: any) => {
     const app = appModule.default || appModule;
     return app(req, res);
   } catch (error: any) {
-    console.error('Serverless App Execution Error:', error);
     return res.status(500).json({
       success: false,
       error: 'Serverless App Execution Error',
