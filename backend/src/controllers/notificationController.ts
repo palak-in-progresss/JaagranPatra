@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import { PrismaClient, UserRole, NotificationStatus } from '@prisma/client';
+import { UserRole, NotificationStatus } from '@prisma/client';
 import { AuthenticatedRequest } from '../middleware/auth';
-
-const prisma = new PrismaClient();
+import prisma from '../config/database';
 
 // Create notification helper function
 export const createNotification = async (

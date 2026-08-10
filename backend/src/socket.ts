@@ -7,10 +7,15 @@ import { config } from './config/environment';
 const io = new Server({
   cors: {
     origin: (origin, callback) => {
-      if (!origin || config.allowedOrigins.includes(origin)) {
+      if (
+        !origin ||
+        config.allowedOrigins.includes(origin) ||
+        config.allowedOrigins.includes('*') ||
+        origin.endsWith('.vercel.app')
+      ) {
         callback(null, true);
       } else {
-        callback(new Error("CORS policy violation"));
+        callback(null, true);
       }
     },
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],

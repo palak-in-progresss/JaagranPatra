@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import {
-  PrismaClient,
   UserRole,
   IssueStatus,
   IssuePriority,
@@ -14,9 +13,7 @@ import {
   createIssueUpdateNotification,
 } from './notificationController';
 import cloudinary, { uploadBufferToCloudinary } from '../utils/cloudinary';
-// import { geocodeAddress } from '../utils/geocoding';
-
-const prisma = new PrismaClient();
+import prisma from '../config/database';
 
 // Helper function to log MLA information for debugging
 const logMLAInfo = async (stateId: string) => {

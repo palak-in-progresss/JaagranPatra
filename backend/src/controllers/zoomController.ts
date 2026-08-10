@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
 import zoomService from '../services/zoomService';
 import emailService from '../services/emailService';
 import { config } from '../config/environment';
-
-const prisma = new PrismaClient();
+import prisma from '../config/database';
 
 interface AuthenticatedRequest extends Request {
   user?: {

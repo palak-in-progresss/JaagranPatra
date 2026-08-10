@@ -1,12 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
-import { PrismaClient, UserRole, BodyType } from '@prisma/client';
+import { UserRole, BodyType } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { AuthenticatedRequest } from '../middleware/auth';
 import { sendVerificationEmail, sendResetPasswordEmail } from '../utils/email';
 import { uploadBufferToCloudinary } from '../utils/cloudinary';
-
-const prisma = new PrismaClient();
+import prisma from '../config/database';
 const JWT_SECRET: string = process.env.JWT_SECRET || 'your_jwt_secret';
 const JWT_EXPIRES_IN: string = process.env.JWT_EXPIRY_TIME || '7d';
 

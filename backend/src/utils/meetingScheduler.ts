@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '../config/database';
 import emailService from '../services/emailService';
-
-const prisma = new PrismaClient();
 
 export interface MeetingScheduleData {
   title: string;

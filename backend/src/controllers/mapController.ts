@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
 import { AuthenticatedRequest } from '../middleware/auth';
 import fs from 'fs';
 import path from 'path';
-
-const prisma = new PrismaClient();
+import prisma from '../config/database';
 
 // Interface for election data
 interface ElectionData {

@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
-import { PrismaClient, UserRole, BodyType, IssueStatus } from '@prisma/client';
+import { UserRole, BodyType, IssueStatus } from '@prisma/client';
 import { AuthenticatedRequest } from '../middleware/auth';
 import bcrypt from 'bcryptjs';
 import * as fs from 'fs';
 import * as path from 'path';
 import { uploadBufferToCloudinary } from '../utils/cloudinary';
-
-const prisma = new PrismaClient();
+import prisma from '../config/database';
 
 // Dashboard Statistics
 export const getDashboardStats = async (

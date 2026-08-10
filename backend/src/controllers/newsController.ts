@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
 import { asyncHandler } from '../middleware/validation';
-
-const prisma = new PrismaClient();
+import prisma from '../config/database';
 
 // Get public news (active news only)
 export const getPublicNews = asyncHandler(
