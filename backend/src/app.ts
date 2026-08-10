@@ -85,10 +85,11 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api', routes);
 
-// Start meeting reminder service
-if (process.env.NODE_ENV !== 'test') {
+// Start meeting reminder service (only outside serverless environment)
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   meetingReminderService.start();
 }
+
 
 // Error handling middleware (must be last)
 app.use(notFoundHandler);
