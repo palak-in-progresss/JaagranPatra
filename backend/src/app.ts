@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import routes from './routes';
+import { config } from './config/environment';
 
 dotenv.config();
 
@@ -11,7 +12,18 @@ app.set('trust proxy', 1);
 
 app.use(
   cors({
-    origin: '*',
+    origin: (origin, callback) => {
+      // Allow non-browser clients (no origin) and the sites we trust.
+      if (
+        !origin ||
+        config.allowedOrigins.includes(origin) ||
+        config.allowedOrigins.includes('*')
+      ) {
+        callback(null, true);
+      } else {
+        callback(null, false);
+      }
+    },
     credentials: true,
   })
 );

@@ -7,15 +7,15 @@ import { config } from './config/environment';
 const io = new Server({
   cors: {
     origin: (origin, callback) => {
+      // Allow non-browser clients (no origin) and the sites we trust.
       if (
         !origin ||
         config.allowedOrigins.includes(origin) ||
-        config.allowedOrigins.includes('*') ||
-        origin.endsWith('.vercel.app')
+        config.allowedOrigins.includes('*')
       ) {
         callback(null, true);
       } else {
-        callback(null, true);
+        callback(new Error('Origin not allowed by CORS'));
       }
     },
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
@@ -29,8 +29,7 @@ io.use((socket, next) => {
 
   if (!token) return next(new Error('Access denied. No token provided.'));
   try {
-    const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
-    const decoded = jwt.verify(token, JWT_SECRET) as any;
+    const decoded = jwt.verify(token, config.jwtSecret) as any;
     socket.data.user = decoded;
     next();
   } catch (error) {

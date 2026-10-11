@@ -6,7 +6,8 @@ import { AuthenticatedRequest } from '../middleware/auth';
 import { sendVerificationEmail, sendResetPasswordEmail } from '../utils/email';
 import { uploadBufferToCloudinary } from '../utils/cloudinary';
 import prisma from '../config/database';
-const JWT_SECRET: string = process.env.JWT_SECRET || 'your_jwt_secret';
+import { config } from '../config/environment';
+const JWT_SECRET: string = config.jwtSecret;
 const JWT_EXPIRES_IN: string = process.env.JWT_EXPIRY_TIME || '7d';
 
 // Register (Public registration for CITIZENS only)
